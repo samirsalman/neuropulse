@@ -16,6 +16,7 @@ class Handler(ABC):
         self,
         name: str = None,
         mode: HandlerMode = HandlerMode.APPEND,
+        **kwargs,
     ) -> None:
         self.name = name
         self.mode = mode
@@ -61,3 +62,50 @@ class Handler(ABC):
             from src.handlers.console_handler import ConsoleHandler
 
             return ConsoleHandler
+
+        if type == "mongo":
+            from src.handlers.mongo_handler import MongoHandler
+
+            return MongoHandler
+
+
+class RemoteHandler(Handler):
+    def __init__(
+        self,
+        name: str = None,
+        mode: HandlerMode = HandlerMode.APPEND,
+        node_id: str = None,
+        **kwargs,
+    ) -> None:
+        super().__init__(name, mode)
+        self.node_id = node_id
+
+    def __repr__(self) -> str:
+        return f"RemoteHandler(name={self.name}, mode={self.mode})"
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
+    @abstractmethod
+    def handle(self, data: List[GenericData]):
+        pass
+
+    @abstractmethod
+    def clear(self):
+        pass
+
+    @abstractmethod
+    def get_last(self):
+        pass
+
+    @abstractmethod
+    def get_all(self):
+        pass
+
+    @abstractmethod
+    def get_last_n(self, n: int):
+        pass
+
+    @abstractmethod
+    def get_index(self, index: int):
+        pass

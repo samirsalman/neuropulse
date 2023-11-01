@@ -1,0 +1,7 @@
+services:
+  mongodb:
+    image: mongo:5.0.22
+    ports:
+      - 27017:27017
+    restart: always
+

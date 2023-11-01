@@ -6,7 +6,7 @@ from src.data.generic_data import GenericData
 
 class ConsoleHandler(Handler):
     def __init__(
-        self, name: str = None, mode: HandlerMode = HandlerMode.APPEND
+        self, name: str = None, mode: HandlerMode = HandlerMode.APPEND, **kwargs
     ) -> None:
         super().__init__(name, mode)
 
