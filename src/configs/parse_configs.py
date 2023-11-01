@@ -18,6 +18,14 @@ class FileHandlerConfig:
 
 
 @dataclass
+class MongoHandlerConfig:
+    mongo_uri: Annotated[str, "mongo_uri"]
+    mongo_db: Annotated[str, "mongo_db"]
+    mongo_collection: Annotated[str, "mongo_collection"]
+    node_id: Annotated[str, "node_id"]
+
+
+@dataclass
 class NeuroPulseConfig:
     app_logging_level: Annotated[
         Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"], "app_logging_level"

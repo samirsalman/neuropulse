@@ -61,3 +61,8 @@ class Handler(ABC):
             from src.handlers.console_handler import ConsoleHandler
 
             return ConsoleHandler
+
+        if type == "mongo":
+            from src.handlers.mongo_handler import MongoHandler
+
+            return MongoHandler
