@@ -13,7 +13,7 @@ handlers:
       name: gpu_monitor
   - type: mongo
     config:
-      mongo_host: localhost
+      mongo_host: mongodb
       mongo_db: gpu_monitor
       mongo_collection: gpu_monitor_0
       node_id: 0
