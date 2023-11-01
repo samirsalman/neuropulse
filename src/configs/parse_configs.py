@@ -45,14 +45,17 @@ def parse_configs(config_path: str, node: str = None):
     with open(str(config_path), "r") as f:
         config = yaml.safe_load(f)
 
+    environment_name = config.get("environment_name", "default")
     return NeuroPulseConfig(
         app_logging_level=config.get("app_logging_level", "INFO"),
         gpu_monitoring_interval=config.get("gpu_monitoring_interval", 5),
+        environment_name=environment_name,
         handlers=[
             Handler.get_handler(handler["type"])(
-                **handler.get("config", {}), node_id=node
+                **handler.get("config", {}),
+                node_id=node,
+                mongo_collection=environment_name,
             )
             for handler in config.get("handlers", [])
         ],
-        environment_name=config.get("environment_name", "default"),
     )
