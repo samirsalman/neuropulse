@@ -19,10 +19,12 @@ class FileHandlerConfig:
 
 @dataclass
 class MongoHandlerConfig:
-    mongo_uri: Annotated[str, "mongo_uri"]
-    mongo_db: Annotated[str, "mongo_db"]
+    mongo_host: Annotated[str, "mongo_host"]
     mongo_collection: Annotated[str, "mongo_collection"]
+    mongo_db: Annotated[str, "mongo_db"]
     node_id: Annotated[str, "node_id"]
+    mongo_user: Annotated[str, "mongo_user"] = None
+    mongo_password: Annotated[str, "mongo_password"] = None
 
 
 @dataclass
