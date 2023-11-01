@@ -12,7 +12,7 @@ class ConsoleHandler(Handler):
 
     def handle(self, data: List[GenericData]):
         for d in data:
-            logger.info(d.to_csv())
+            logger.info(d.to_json())
 
     def clear(self):
         pass
