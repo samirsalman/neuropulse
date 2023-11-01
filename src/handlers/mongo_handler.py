@@ -1,3 +1,4 @@
+import json
 from typing import List
 from src.data.generic_data import GenericData
 from src.handlers.handler import Handler, HandlerMode
@@ -39,10 +40,13 @@ class MongoHandler(Handler):
 
     def handle(self, data: List[GenericData]):
         logger.info(f"Saving {len(data)} data to mongo")
+        _data = []
         for d in data:
+            d = json.loads(d.to_json())
             d["index"] = self.db[self.mongo_collection].count_documents({})
             d["node_id"] = self.node_id
-        self.db[self.mongo_collection].insert_many(data)
+            _data.append(d)
+        self.db[self.mongo_collection].insert_many(_data)
         logger.info(f"Saved {len(data)} data to mongo")
 
     def close(self):
