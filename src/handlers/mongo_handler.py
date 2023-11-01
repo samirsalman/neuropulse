@@ -2,7 +2,7 @@ from typing import List
 from src.data.generic_data import GenericData
 from src.handlers.handler import Handler, HandlerMode
 from pymongo import MongoClient
-
+from src.app_logging.logger import logger
 
 class MongoHandler(Handler):
     def __init__(
@@ -19,17 +19,27 @@ class MongoHandler(Handler):
         self.mongo_db = mongo_db
         self.mongo_collection = mongo_collection
         self.client = MongoClient(self.mongo_uri)
+        try:
+            self.client.server_info()
+        except Exception as e:
+            logger.error(f"Could not connect to mongo: {e}")
+            raise e
+        
         self.db = self.client[self.mongo_db]
         self.node_id = node_id
 
     def handle(self, data: List[GenericData]):
+        logger.info(f"Saving {len(data)} data to mongo")
         for d in data:
             d["index"] = self.db[self.mongo_collection].count_documents({})
             d["node_id"] = self.node_id
         self.db[self.mongo_collection].insert_many(data)
+        logger.info(f"Saved {len(data)} data to mongo")
 
     def close(self):
+        logger.info("Closing mongo connection")
         self.client.close()
+        logger.info("Closed mongo connection")
 
     def get_all(self):
         return self.db[self.mongo_collection].find()
