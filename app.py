@@ -76,4 +76,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     app = NeuroImpulseApp()
-    app.start(args.config)
+    app.start(args.config, args.node)
