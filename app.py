@@ -1,5 +1,5 @@
 import time
-from neuropulse.src.handlers.handler import RemoteHandler
+from src.handlers.handler import RemoteHandler
 from src.common.logo import Logo
 from src.monitors.gpu_monitor import GPUMonitoring
 from src.app_logging.logger import create_logger
