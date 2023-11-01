@@ -52,7 +52,7 @@ class FileHandler(Handler):
         if self.rotate:
             self.rotate_strategy, self.rotate_interval = validate_rotate(rotate)
         self.gzip = gzip
-        self.file = Path(".neuropulse", "logs") / (self.file_prefix + ".log")
+        self.file = Path("/var/log/.neuropulse", "logs") / (self.file_prefix + ".log")
         self.file.parent.mkdir(parents=True, exist_ok=True)
 
         self.last_index = 0
