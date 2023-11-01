@@ -14,4 +14,3 @@ handlers:
   - type: mongo
     config:
       mongo_host: 0.0.0.0
-      mongo_db: gpu_monitor

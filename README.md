@@ -31,8 +31,6 @@ handlers:
   - type: mongo
     config:
       mongo_host: 0.0.0.0
-      mongo_db: gpu_monitor
-      mongo_collection: gpu_monitor_0
 ```
 
 - The `app_logging_level` is the logging level of the tool. 
@@ -42,8 +40,7 @@ handlers:
 - The `file_prefix` is the prefix of the file that is used to write the GPU information. The `rotate` is the number of files to keep. The `name` is the name of the file. The `gzip` is a boolean that indicates whether to compress the file or not.
 - The `name` is the name of the console handler.
 - The `node_id` is the id of the node. It is used to distinguish between different nodes in the mongoDB database.
-- The `mongo_host` is the host of the mongoDB database. The `mongo_db` is the name of the mongoDB database. 
-
+- The `mongo_host` is the host of the mongoDB database. 
 
 To use neuropulse in a cluster you need to setup a mongoDB database. You can use the docker-compose file to setup a mongoDB database. Then in each node you need to run the following command:
 ```bash

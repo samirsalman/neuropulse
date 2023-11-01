@@ -55,6 +55,7 @@ def parse_configs(config_path: str, node: str = None):
                 **handler.get("config", {}),
                 node_id=node,
                 mongo_collection=environment_name,
+                mongo_db="neuropulse",
             )
             for handler in config.get("handlers", [])
         ],
