@@ -1,5 +1,6 @@
 config=$1
+node=$2
 
 pip install -r requirements.txt
 
-python app.py --config $config
+python app.py --config $config --node $node

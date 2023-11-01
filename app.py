@@ -1,4 +1,5 @@
 import time
+from src.handlers.mongo_handler import MongoHandler
 from src.common.logo import Logo
 from src.monitors.gpu_monitor import GPUMonitoring
 from src.app_logging.logger import create_logger
@@ -26,14 +27,19 @@ class NeuroImpulseApp(App):
         self.retry = 5
         self.retried = 0
 
-    def start(self, config: str):
+    def start(self, config: str, node: str):
         self.configs = parse_configs(config)
+        self.node = node
         self._start()
 
     def _start(self):
         super().start(self.configs)
         create_logger(level=self.configs.app_logging_level)
         logger.info("Starting NeuroPulse")
+
+        for handler in self.configs.handlers:
+            if isinstance(handler, MongoHandler):
+                handler.node_id = self.node
 
         # start monitors
         gpu_monitor = GPUMonitoring(
@@ -66,6 +72,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, required=True)
+    parser.add_argument("--node", type=str, required=True)
     args = parser.parse_args()
 
     app = NeuroImpulseApp()
