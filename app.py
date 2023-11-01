@@ -1,4 +1,5 @@
 import time
+from src.common.logo import Logo
 from src.monitors.gpu_monitor import GPUMonitoring
 from src.app_logging.logger import create_logger
 from src.configs.parse_configs import parse_configs
@@ -14,6 +15,8 @@ class App:
         return App._instance
 
     def start(self, config: str):
+        logo = Logo()
+        logo.show()
         raise NotImplementedError
 
 
@@ -28,6 +31,7 @@ class NeuroImpulseApp(App):
         self._start()
 
     def _start(self):
+        super().start(self.configs)
         create_logger(level=self.configs.app_logging_level)
         logger.info("Starting NeuroPulse")
 
