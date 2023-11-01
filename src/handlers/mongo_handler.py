@@ -1,12 +1,12 @@
 import json
 from typing import List
 from src.data.generic_data import GenericData
-from src.handlers.handler import Handler, HandlerMode
+from src.handlers.handler import HandlerMode, RemoteHandler
 from pymongo import MongoClient
 from src.app_logging.logger import logger
 
 
-class MongoHandler(Handler):
+class MongoHandler(RemoteHandler):
     def __init__(
         self,
         name: str = None,
@@ -18,7 +18,7 @@ class MongoHandler(Handler):
         mongo_collection: str = None,
         node_id: str = "node-0",
     ) -> None:
-        super().__init__(name, mode)
+        super().__init__(name, mode, node_id)
         self.user = mongo_user
         self.password = mongo_password
         self.mongo_uri = mongo_host

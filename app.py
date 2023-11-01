@@ -38,7 +38,7 @@ class NeuroImpulseApp(App):
         logger.info("Starting NeuroPulse")
 
         for handler in self.configs.handlers:
-            if isinstance(handler, MongoHandler):
+            if isinstance(handler, RemoteHandler):
                 handler.node_id = self.node
 
         # start monitors
