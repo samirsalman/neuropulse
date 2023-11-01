@@ -42,7 +42,7 @@ class MongoHandler(Handler):
         logger.info(f"Saving {len(data)} data to mongo")
         _data = []
         for d in data:
-            d = json.loads(d.to_json())
+            d = d.to_json()
             d["index"] = self.db[self.mongo_collection].count_documents({})
             d["node_id"] = self.node_id
             _data.append(d)
