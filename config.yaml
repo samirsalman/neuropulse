@@ -1,0 +1,13 @@
+app_logging_level: INFO
+gpu_monitoring_interval: 10
+environment_name: dev
+handlers:
+  - type: file
+    config:
+      file_prefix: gpu_monitor
+      rotate: 1000
+      name: gpu_monitor
+      gzip: true
+  - type: console
+    config:
+      name: gpu_monitor
