@@ -1,5 +1,5 @@
 import time
-from src.handlers.mongo_handler import MongoHandler
+from neuropulse.src.handlers.handler import RemoteHandler
 from src.common.logo import Logo
 from src.monitors.gpu_monitor import GPUMonitoring
 from src.app_logging.logger import create_logger
@@ -28,7 +28,7 @@ class NeuroImpulseApp(App):
         self.retried = 0
 
     def start(self, config: str, node: str):
-        self.configs = parse_configs(config)
+        self.configs = parse_configs(config, node)
         self.node = node
         self._start()
 

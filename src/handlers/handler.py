@@ -16,6 +16,7 @@ class Handler(ABC):
         self,
         name: str = None,
         mode: HandlerMode = HandlerMode.APPEND,
+        **kwargs,
     ) -> None:
         self.name = name
         self.mode = mode
@@ -74,6 +75,7 @@ class RemoteHandler(Handler):
         name: str = None,
         mode: HandlerMode = HandlerMode.APPEND,
         node_id: str = None,
+        **kwargs,
     ) -> None:
         super().__init__(name, mode)
         self.node_id = node_id

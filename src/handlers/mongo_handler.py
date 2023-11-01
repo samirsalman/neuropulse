@@ -17,6 +17,7 @@ class MongoHandler(RemoteHandler):
         mongo_db: str = None,
         mongo_collection: str = None,
         node_id: str = "node-0",
+        **kwargs,
     ) -> None:
         super().__init__(name, mode, node_id)
         self.user = mongo_user

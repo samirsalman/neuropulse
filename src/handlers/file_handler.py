@@ -45,6 +45,7 @@ class FileHandler(Handler):
         name: str = None,
         mode: HandlerMode = HandlerMode.APPEND,
         gzip: bool = False,
+        **kwargs,
     ) -> None:
         super().__init__(name, mode)
         self.file_prefix = file_prefix

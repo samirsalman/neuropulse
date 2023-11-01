@@ -37,7 +37,7 @@ class NeuroPulseConfig:
     environment_name: Annotated[str, "environment_name"]
 
 
-def parse_configs(config_path: str):
+def parse_configs(config_path: str, node: str = None):
     config_path = Path(config_path)
     if not config_path.exists():
         raise FileNotFoundError(f"Config file not found: {config_path}")
@@ -49,7 +49,9 @@ def parse_configs(config_path: str):
         app_logging_level=config.get("app_logging_level", "INFO"),
         gpu_monitoring_interval=config.get("gpu_monitoring_interval", 5),
         handlers=[
-            Handler.get_handler(handler["type"])(**handler.get("config", {}))
+            Handler.get_handler(handler["type"])(
+                **handler.get("config", {}), node_id=node
+            )
             for handler in config.get("handlers", [])
         ],
         environment_name=config.get("environment_name", "default"),
