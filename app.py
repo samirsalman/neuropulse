@@ -17,7 +17,7 @@ class App:
     def start(self, config: str):
         logo = Logo()
         logo.show()
-        raise NotImplementedError
+        pass
 
 
 class NeuroImpulseApp(App):
