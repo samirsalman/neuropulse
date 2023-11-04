@@ -21,7 +21,7 @@ class App:
         pass
 
 
-class NeuroImpulseApp(App):
+class NeuroPulseApp(App):
     def __init__(self) -> None:
         super().__init__()
         self.retry = 5
@@ -75,5 +75,5 @@ if __name__ == "__main__":
     parser.add_argument("--node", type=str, required=True)
     args = parser.parse_args()
 
-    app = NeuroImpulseApp()
+    app = NeuroPulseApp()
     app.start(args.config, args.node)
